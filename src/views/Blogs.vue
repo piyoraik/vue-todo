@@ -14,8 +14,16 @@
           <tr v-for="blog in blogs" v-bind:key="blog.id">
             <td>{{ blog.title }}</td>
             <td>{{ blog.body }}</td>
-            <td>Show</td>
-            <td>Edit</td>
+            <td>
+              <router-link :to="{ name: 'show-blog', params: { id: blog.id } }"
+                >Show</router-link
+              >
+            </td>
+            <td>
+              <router-link :to="{ name: 'edit-blog', params: { id: blog.id } }"
+                >Edit</router-link
+              >
+            </td>
             <td>Destroy</td>
           </tr>
         </table>
@@ -25,15 +33,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import AddBlog from './AddBlog'
+import { mapState } from "vuex";
+import AddBlog from "./AddBlog";
 
 export default {
   components: {
-    AddBlog
+    AddBlog,
   },
   computed: {
-    ...mapState(['blogs'])
+    ...mapState(["blogs"]),
   },
-}
+};
 </script>

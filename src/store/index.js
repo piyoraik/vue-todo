@@ -16,6 +16,13 @@ export default new Vuex.Store({
       const blogs = state.blogs.concat(blog.data);
       state.blogs = blogs;
     },
+    EDIT_BLOG(state, blog) {
+      state.blogs.forEach((b) => {
+        if (b.id === blog.id) {
+          b = blog;
+        }
+      });
+    },
   },
   actions: {
     async fetchBlogs({ commit }) {
@@ -31,6 +38,12 @@ export default new Vuex.Store({
       const saveBlog = res.data;
       commit("ADD_BLOG", saveBlog);
       return saveBlog.data;
+    },
+    async editBlog({ commit }, blog) {
+      const res = await axios().put(`/posts/${blog.id}`, blog);
+      const editBlog = res.data;
+      commit("EDIT_BLOG", editBlog);
+      return editBlog.data;
     },
   },
 });
