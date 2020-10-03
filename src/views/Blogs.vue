@@ -24,7 +24,11 @@
                 >Edit</router-link
               >
             </td>
-            <td>Destroy</td>
+            <td>
+              <span class="button_link" v-on:click="deleteBlog(blog)"
+                >[ delete ]</span
+              >
+            </td>
           </tr>
         </table>
       </v-col>
@@ -42,6 +46,11 @@ export default {
   },
   computed: {
     ...mapState(["blogs"]),
+  },
+  methods: {
+    deleteBlog(blog) {
+      this.$store.dispatch("deleteBlog", blog);
+    },
   },
 };
 </script>

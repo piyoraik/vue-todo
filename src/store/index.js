@@ -23,6 +23,10 @@ export default new Vuex.Store({
         }
       });
     },
+    DELETE_BLOG(state, blog) {
+      const blogs = state.blogs.filter((b) => b.id != blog);
+      state.blogs = blogs;
+    },
   },
   actions: {
     async fetchBlogs({ commit }) {
@@ -44,6 +48,10 @@ export default new Vuex.Store({
       const editBlog = res.data;
       commit("EDIT_BLOG", editBlog);
       return editBlog.data;
+    },
+    async deleteBlog({ commit }, blog) {
+      await axios().delete(`/posts/${blog.id}`, blog);
+      commit("DELETE_BLOG", blog.id);
     },
   },
 });
