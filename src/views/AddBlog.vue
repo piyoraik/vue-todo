@@ -12,14 +12,13 @@ export default {
   data() {
     return {
       blog: {},
-    }
+    };
   },
   methods: {
-    async onSubmit(){
-      await this.$store.dispatch('addBlog', this.blog )
-      this.blog.title = ""
-      this.blog.body = ""
-    }
+    async onSubmit() {
+      const blog = await this.$store.dispatch("addBlog", this.blog);
+      this.$router.push({ name: "show-blog", params: { id: blog.id } });
+    },
   },
-}
+};
 </script>
